@@ -1,0 +1,46 @@
+<html>
+
+<head>
+	<title>Router test page</title>
+</head>
+
+<body>
+	<nav>
+		<a href='#/route1/12345/pluck'>Route1</a>
+		<a href='#/route2/origami/about'>Route2</a>
+	<n/av>
+	
+	<!-- target element -->
+	<div id='applicationRoot'>Click a link in the nav</diV>
+	
+	<!-- 'route1' route contents -->
+	<script type='text/html' ts-route='route1'>
+		<p>Route 1 - <em>Open the console for the good stuff!</em></p>
+	</script>
+	
+	<!-- 'route2' route contents -->
+	<script type='text/html' ts-route='route2'>
+		<p>Route 2 - <em>Open the console for the good stuff!</em></p>
+	</script>
+	
+	<script type='text/javascript' src='ts_router.js'></script>
+	<script>
+		function handler(args) {
+			console.log('Route ' + args[0] + ' reporting for duty! Arguments: ', args);
+		}
+		
+		function handler2(args) {
+			console.log('Multiple handlers can be registered per route to change the DOM, insert values, or interpret arguments');
+		}
+		
+		Router.registerHandler('route1', handler);
+		Router.registerHandler('route1', handler2);
+		Router.registerHandler('route2', handler);		
+		Router.init();
+
+		
+	</script>
+</body>
+
+
+</html>
