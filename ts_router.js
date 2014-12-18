@@ -1,7 +1,7 @@
 var Router = {
 	// Inspiration: http://joakimbeng.eu01.aws.af.cm/a-javascript-router-in-20-lines/
 	// Router will interpret the hash path (url/#/this/path/here) and attempt to find an element
-	// (most likely a <script> element with a ts-route attribute that matches the first argument
+	// (most likely a <script> element) with a ts-route attribute that matches the first argument
 	// It will then replace the information in that selected element into the target element
 	
 	// Can be retooled to use jQuery or salt.js $() selector, but I have included a function that
@@ -26,10 +26,11 @@ var Router = {
 	},
 	
 	init: function(target, binding, isVerbose) {
-		// Make sure we understand where all this content is going
+		// Get some new settings if they are supplied. We assume that they have default values
+		// already set above
 		if (typeof isVerbose === 'boolean') this.verbose = isVerbose; 
 		if (typeof binding === 'string') this.binding = binding; 
-		
+
 		if (typeof target == 'undefined' || target == '') {
 			if (this.verbose) console.debug('Router defaulting to "' + this.target + '" for target element ID');
 		} else {
@@ -63,7 +64,7 @@ var Router = {
 					// Each function is passed the hash path as an array of strings that it can use or ignore
 					if (typeof app.handlers[url[0]] === 'object' && app.handlers[url[0]].length > 0) {
 						for (func in app.handlers[url[0]]) {
-							app.handlers[url[0]][func](Router.arguments);
+							app.handlers[url[0]][func](app.arguments);
 						}
 					}
 					
